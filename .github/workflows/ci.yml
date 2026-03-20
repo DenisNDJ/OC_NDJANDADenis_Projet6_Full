@@ -39,8 +39,8 @@ jobs:
 
       - name: Test Report
         uses: dorny/test-reporter@v2
-        if: ${{ !cancelled() }}       # run this step even if previous step failed
+        if: ${{ !cancelled() }}
         with:
           name: Tests
           path: test_result/**/*.xml
-          reporter: jest-junit 
+          reporter: java-junit 
