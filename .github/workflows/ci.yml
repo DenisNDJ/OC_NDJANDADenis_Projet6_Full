@@ -34,15 +34,13 @@ jobs:
           cache-dependency-path: |
             Angular/package-lock.json
 
+      - name: Node install
+        run: cd Angular
+        run: npm ci
+        run: cd ../
+        
       - name: Run tests
         run: bash ./run_all_test.sh
-
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test_result
-          path: test_result/
 
       - name: Publish test report
         if: always()
