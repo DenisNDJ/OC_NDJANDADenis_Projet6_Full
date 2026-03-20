@@ -43,6 +43,8 @@ run_java_tests() {
     echo "===== Lancement des tests Java ====="
     cd "$JAVA_DIR"
 
+    chmod +x gradlew
+
     echo "===== Test des dependances Java ====="
     testing_java_dependencies
 
