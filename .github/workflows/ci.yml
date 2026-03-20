@@ -35,7 +35,7 @@ jobs:
             Angular/package-lock.json
 
       - name: Run tests
-        run: bash ./run-tests.sh
+        run: bash ./run_all_test.sh
 
       - name: Upload test results
         if: always()
