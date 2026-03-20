@@ -1,0 +1,5 @@
+services:
+  device34app:
+    build: .
+    ports:
+      - 4200:80
