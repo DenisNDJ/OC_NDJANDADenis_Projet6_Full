@@ -37,10 +37,10 @@ jobs:
       - name: Run tests
         run: bash ./run_all_test.sh
 
-      - name: Publish test report
-        if: always()
-        uses: dorny/test-reporter@v1
+      - name: Test Report
+        uses: dorny/test-reporter@v2
+        if: ${{ !cancelled() }}       # run this step even if previous step failed
         with:
-          name: Unit Tests
+          name: Tests
           path: test_result/**/*.xml
-          reporter: java-junit
+          reporter: jest-junit 
