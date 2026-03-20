@@ -64,6 +64,8 @@ run_angular_tests() {
     echo "===== Lancement des tests Angular ====="
     cd "$ANGULAR_DIR"
 
+    npm ci
+
     echo "===== Test des dependances Angular ====="
     testing_angular_dependencies
 
