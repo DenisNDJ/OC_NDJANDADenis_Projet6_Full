@@ -10,8 +10,8 @@ JAVA_DIR="$ROOT_DIR/Java"
 ANGULAR_DIR="$ROOT_DIR/Angular"
 
 RESULT_DIR="$ROOT_DIR/test_result"
-JAVA_RESULT_DIR="$RESULT_DIR/java"
-ANGULAR_RESULT_DIR="$RESULT_DIR/angular"
+JAVA_RESULT_DIR="$RESULT_DIR/Java"
+ANGULAR_RESULT_DIR="$RESULT_DIR/Angular"
 
 # Création dossiers résultats
 mkdir -p "$RESULT_DIR"
