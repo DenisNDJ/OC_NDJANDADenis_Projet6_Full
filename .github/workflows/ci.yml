@@ -20,7 +20,6 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          cache-depedency-path: Angular/package-lock.json
 
       - run: bash ./run_all_test.sh
 
