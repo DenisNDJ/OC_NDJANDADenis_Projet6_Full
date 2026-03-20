@@ -10,8 +10,8 @@ JAVA_DIR="$ROOT_DIR/Java"
 ANGULAR_DIR="$ROOT_DIR/Angular"
 
 RESULT_DIR="$ROOT_DIR/test_result"
-JAVA_RESULT_DIR="$RESULT_DIR/Java"
-ANGULAR_RESULT_DIR="$RESULT_DIR/Angular"
+JAVA_RESULT_DIR="$RESULT_DIR/java"
+ANGULAR_RESULT_DIR="$RESULT_DIR/angular"
 
 # Création dossiers résultats
 mkdir -p "$RESULT_DIR"
@@ -46,7 +46,7 @@ run_java_tests() {
     echo "===== Test des dependances Java ====="
     testing_java_dependencies
 
-    #### ajout test cmd
+    echo "===== Test Java ====="
     ./gradlew clean test
 
     echo "===== Tests Java terminés ====="
@@ -66,7 +66,7 @@ run_angular_tests() {
     echo "===== Test des dependances Angular ====="
     testing_angular_dependencies
 
-    #### ajout test cmd
+    echo "===== Test Angular ====="
     npm test
 
     echo "===== Tests Angular terminés ====="
