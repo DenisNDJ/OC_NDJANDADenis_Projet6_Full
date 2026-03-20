@@ -54,7 +54,7 @@ run_java_tests() {
     echo "===== Tests Java terminés ====="
 
     # Copie des resultats
-    cp "$JAVA_DIR\build\test-results\test"/*.xml "$JAVA_RESULT_DIR"/
+    cp "$JAVA_DIR/build/test-results/test"/*.xml "$JAVA_RESULT_DIR"/
 }
 
 run_angular_tests() {
@@ -74,7 +74,7 @@ run_angular_tests() {
     echo "===== Tests Angular terminés ====="
 
     # Copie des resultats
-    cp "$ANGULAR_DIR\reports"/*.xml "$ANGULAR_RESULT_DIR"/
+    cp "$ANGULAR_DIR/reports"/*.xml "$ANGULAR_RESULT_DIR"/
 }
 
 # Exécution des tests
