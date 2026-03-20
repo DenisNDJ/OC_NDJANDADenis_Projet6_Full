@@ -1,0 +1,27 @@
+name: Project 6 CI/CD
+
+on:
+  pull_request:
+     branches:
+       - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-java@4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: gradle
+      
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: npm
+          cache-depedency-path: Angular/package-lock.json
+
+      - run: bash ./run_all_test.sh
+
