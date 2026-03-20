@@ -34,8 +34,5 @@ jobs:
           cache-dependency-path: |
             Angular/package-lock.json
 
-      - name: Node install
-        run: npm ci
-
       - name: Run tests
         run: bash ./run_all_test.sh

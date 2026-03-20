@@ -29,9 +29,10 @@ testing_java_dependencies() {
 testing_angular_dependencies() {
     # Test existance node modules
     if [ ! -d "$ANGULAR_DIR/node_modules" ]; then
-        echo "Erreur : node_modules n'existe pas."
-        echo "Exécuter 'npm install' dans $ANGULAR_DIR."
-        exit 1
+        if[ ! -f "npm ci" ]; then
+            echo "Erreur : node_modules n'existe pas."
+            exit 1
+        fi
     fi
 }
 
