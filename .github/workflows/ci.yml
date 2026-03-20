@@ -1,9 +1,8 @@
 name: Project 6 CI/CD
 
 on:
+  push:
   pull_request:
-     branches:
-       - main
 
 jobs:
   test:
