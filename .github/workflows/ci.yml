@@ -70,4 +70,4 @@ jobs:
         with:
           context: /back
           push: true
-          tags: backee
+          tags: ghcr.io/projet6/back:latest
