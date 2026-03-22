@@ -69,7 +69,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: ghcr.io/${{ github.repository }}/back
+          images: ghcr.io/${{ github.repository }}
 
       - name: Build and push Docker image
         id: push
@@ -77,13 +77,7 @@ jobs:
         with:
           context: back
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-
-      - name: Extract metadata for Docker
-        id: meta
-        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-        with:
-          images: ghcr.io/${{ github.repository }}/front
+          tags: ${{ steps.meta.outputs.tags }}/back
 
       - name: Build and push Docker image
         id: push
@@ -91,4 +85,4 @@ jobs:
         with:
           context: front
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }}/front
