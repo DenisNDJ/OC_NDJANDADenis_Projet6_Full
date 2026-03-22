@@ -44,3 +44,6 @@ jobs:
           name: Tests
           path: test_result/**/*.xml
           reporter: java-junit 
+
+  build:
+    
