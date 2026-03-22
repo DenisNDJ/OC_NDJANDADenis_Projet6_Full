@@ -6,8 +6,8 @@ set -e
 # Set root dir
 ROOT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-JAVA_DIR="$ROOT_DIR/front"
-ANGULAR_DIR="$ROOT_DIR/back"
+JAVA_DIR="$ROOT_DIR/back"
+ANGULAR_DIR="$ROOT_DIR/front"
 
 RESULT_DIR="$ROOT_DIR/test_result"
 JAVA_RESULT_DIR="$RESULT_DIR/back"
