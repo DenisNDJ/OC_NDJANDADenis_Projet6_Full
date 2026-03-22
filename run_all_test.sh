@@ -6,12 +6,12 @@ set -e
 # Set root dir
 ROOT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-JAVA_DIR="$ROOT_DIR/Java"
-ANGULAR_DIR="$ROOT_DIR/Angular"
+JAVA_DIR="$ROOT_DIR/front"
+ANGULAR_DIR="$ROOT_DIR/back"
 
 RESULT_DIR="$ROOT_DIR/test_result"
-JAVA_RESULT_DIR="$RESULT_DIR/java"
-ANGULAR_RESULT_DIR="$RESULT_DIR/angular"
+JAVA_RESULT_DIR="$RESULT_DIR/back"
+ANGULAR_RESULT_DIR="$RESULT_DIR/front"
 
 # Création dossiers résultats
 mkdir -p "$RESULT_DIR"
