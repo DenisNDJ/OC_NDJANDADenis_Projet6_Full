@@ -72,4 +72,4 @@ jobs:
         with:
           context: back
           push: true
-          tags: ghcr.io/${{ github.repository }}/back
+          tags: ${{ github.repository }}/back
