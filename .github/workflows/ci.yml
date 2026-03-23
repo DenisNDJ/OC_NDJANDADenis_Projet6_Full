@@ -14,29 +14,33 @@ jobs:
       contents: read
       checks: write
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      uses: actions/checkout@v4
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: gradle
 
-      uses: actions/setup-java@v4
-      with:
-        distribution: temurin
-        java-version: "21"
-        cache: gradle
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: front/package-lock.json
 
-      uses: actions/setup-node@v4
-      with:
-        node-version: "20"
-        cache: npm
-        cache-dependency-path: front/package-lock.json
+      - name: Run tests
+        run: bash ./run_all_test.sh
 
-      run: bash ./run_all_test.sh
-
-      uses: dorny/test-reporter@v2
-      if: ${{ !cancelled() }}
-      with:
-        name: Tests
-        path: test_result/**/*.xml
-        reporter: java-junit 
+      - name: Test Report
+        uses: dorny/test-reporter@v2
+        if: ${{ !cancelled() }}
+        with:
+          name: Tests
+          path: test_result/**/*.xml
+          reporter: java-junit 
 
   build-and-push-image:
     permissions:
