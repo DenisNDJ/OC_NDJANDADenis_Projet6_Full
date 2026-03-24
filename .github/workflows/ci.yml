@@ -98,6 +98,9 @@ jobs:
         run: cd front
 
       - name: build
+        run: npm ci
+
+      - name: build
         run: npm run build
 
       - name: Build Docker image
