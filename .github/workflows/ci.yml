@@ -103,7 +103,7 @@ jobs:
           cache-dependency-path: front/package-lock.json
 
       - name: semantic release
-        run: npm ci
+        run: npm install semantic-release
 
       - name: semantic release
         run: npx semantic-release
