@@ -102,8 +102,12 @@ jobs:
           cache: npm
           cache-dependency-path: front/package-lock.json
 
-      - name: semantic release
-        run: npm install semantic-release
+        run: |
+          npm install -g semantic-release \
+          @semantic-release/commit-analyzer \
+          @semantic-release/release-notes-generator \
+          @semantic-release/github \
+          @semantic-release/exec
 
       - name: Run semantic-release (inline config)
         run: npx semantic-release
