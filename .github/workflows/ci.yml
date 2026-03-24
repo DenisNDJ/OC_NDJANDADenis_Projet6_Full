@@ -106,7 +106,9 @@ jobs:
         run: npm install semantic-release
 
       - name: semantic release
-        run: npx semantic-release
+        run: npx semantic-release \
+            --branches main \
+            --exec.publishCmd "docker tag ghcr.io/denisndj/oc_ndjandadenis_projet6_front:latest ghcr.io/denisndj/oc_ndjandadenis_projet6_front:${nextRelease.version} && docker tag ghcr.io/denisndj/oc_ndjandadenis_projet6_front:${nextRelease.version} ghcr.io/denisndj/oc_ndjandadenis_projet6_front:latest"
 
 
       
