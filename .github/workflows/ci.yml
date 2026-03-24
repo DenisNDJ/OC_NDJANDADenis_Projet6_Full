@@ -111,7 +111,6 @@ jobs:
         run: |
           npx semantic-release \
           --branches main \
-          --prepare '@semantic-release/exec:echo ${nextRelease.version} > VERSION' \
           --publish '@semantic-release/exec:docker build -t ghcr.io/${{ github.repository }}:${nextRelease.version} -t ghcr.io/denisndj/oc_ndjandadenis_projet6_front:latest . docker push ghcr.io/denisndj/oc_ndjandadenis_projet6_front:${nextRelease.version} && docker push ghcr.io/denisndj/oc_ndjandadenis_projet6_front:latest'
 
 
