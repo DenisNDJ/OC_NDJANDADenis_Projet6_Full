@@ -95,6 +95,7 @@ jobs:
         run: npm install semantic-release @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/exec
 
       - name: Build Docker image
+        run: cd front
         run: docker build . --file front/Dockerfile --tag oc_ndjandadenis_projet6_front:latest
 
       - name: Release + Docker versioning (no push)
