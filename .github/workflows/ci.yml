@@ -114,6 +114,8 @@ jobs:
 
       - name: Run semantic-release (inline config)
         run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
 
       - name: docker
         run: build -t ghcr.io/denisndj/oc_ndjandadenis_projet6_front:latest .
