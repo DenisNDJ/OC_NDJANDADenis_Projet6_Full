@@ -104,11 +104,7 @@ jobs:
 
       - name: install sr
         run: |
-          npm install -g semantic-release \
-          @semantic-release/commit-analyzer \
-          @semantic-release/release-notes-generator \
-          @semantic-release/github \
-          @semantic-release/exec
+          npm install -g semantic-release
 
       - name: Run semantic-release
         id: semantic
