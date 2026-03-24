@@ -112,7 +112,7 @@ jobs:
 
       - name: Run semantic-release
         id: semantic
-        run: npx semantic-release
+        run: npx semantic-release --repository-url ghcr.io/denisndj
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
 
