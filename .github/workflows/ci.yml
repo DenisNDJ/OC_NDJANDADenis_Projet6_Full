@@ -116,7 +116,7 @@ jobs:
         run: npx semantic-release
 
       - name: docker
-        run: build -t ghcr.io/denisndj/oc_ndjandadenis_projet6_front:${nextRelease.version} -t ghcr.io/denisndj/oc_ndjandadenis_projet6_front:latest .
+        run: build -t ghcr.io/denisndj/oc_ndjandadenis_projet6_front:latest .
 
 
       
