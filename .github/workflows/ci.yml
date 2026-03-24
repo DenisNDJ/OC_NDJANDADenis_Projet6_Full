@@ -96,6 +96,8 @@ jobs:
 
       - name: Build Docker image
         run: cd front
+
+      - name: Build Docker image
         run: docker build . --file front/Dockerfile --tag oc_ndjandadenis_projet6_front:latest
 
       - name: Release + Docker versioning (no push)
