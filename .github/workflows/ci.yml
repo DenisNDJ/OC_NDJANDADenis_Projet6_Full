@@ -97,6 +97,9 @@ jobs:
       - name: Build Docker image
         run: cd front
 
+      - name: build
+        run: npm run build
+
       - name: Build Docker image
         run: docker build . --file front/Dockerfile --tag oc_ndjandadenis_projet6_front:latest
 
