@@ -103,8 +103,6 @@ jobs:
           cache-dependency-path: front/package-lock.json
 
       - name: install sr
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         run: |
           npm install -g semantic-release \
           @semantic-release/commit-analyzer \
@@ -113,9 +111,9 @@ jobs:
           @semantic-release/exec
 
       - name: Run semantic-release (inline config)
-        run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+        run: npx semantic-release
 
       - name: docker
         run: build -t ghcr.io/denisndj/oc_ndjandadenis_projet6_front:latest .
