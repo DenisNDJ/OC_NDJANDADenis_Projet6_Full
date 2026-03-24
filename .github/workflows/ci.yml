@@ -84,7 +84,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -98,7 +98,7 @@ jobs:
         run: cd front
 
       - name: Build Docker image
-        run: docker build -t oc_ndjandadenis_projet6_front:latest .
+        run: docker build . -t oc_ndjandadenis_projet6_front:latest
 
       - name: Release + Docker versioning (no push)
         env:
