@@ -79,6 +79,10 @@ jobs:
   release:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      checks: write
+      
     container:
       image: ghcr.io/denisndj/oc_ndjandadenis_projet6_front:latest
       credentials:
@@ -86,6 +90,7 @@ jobs:
         password: ${{ secrets.TOKEN_GITHUB }}
 
     steps:
+
       - name: Checkout
         uses: actions/checkout@v4
 
