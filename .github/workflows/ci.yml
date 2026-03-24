@@ -54,6 +54,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
         with:
@@ -74,3 +75,36 @@ jobs:
           context: front
           push: true
           tags: ghcr.io/denisndj/oc_ndjandadenis_projet6_front:latest
+
+  release:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install semantic-release
+        run: npm install semantic-release @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/exec
+
+      - name: Go front
+        run: cd front
+
+      - name: Build Docker image
+        run: docker build -t oc_ndjandadenis_projet6_front:latest .
+
+      - name: Release + Docker versioning (no push)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx semantic-release \
+            --branches main \
+            --plugins @semantic-release/commit-analyzer,@semantic-release/release-notes-generator,@semantic-release/exec \
+            --exec.publishCmd "docker tag my-app:latest my-app:${nextRelease.version} && docker tag my-app:${nextRelease.version} oc_ndjandadenis_projet6_front:latest"
