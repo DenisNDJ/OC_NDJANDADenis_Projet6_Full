@@ -94,11 +94,8 @@ jobs:
       - name: Install semantic-release
         run: npm install semantic-release @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/exec
 
-      - name: Go front
-        run: cd front
-
       - name: Build Docker image
-        run: docker build . --file Dockerfile --tag oc_ndjandadenis_projet6_front:latest
+        run: docker build . --file front/Dockerfile --tag oc_ndjandadenis_projet6_front:latest
 
       - name: Release + Docker versioning (no push)
         env:
@@ -107,4 +104,4 @@ jobs:
           npx semantic-release \
             --branches main \
             --plugins @semantic-release/commit-analyzer,@semantic-release/release-notes-generator,@semantic-release/exec \
-            --exec.publishCmd "docker tag my-app:latest my-app:${nextRelease.version} && docker tag my-app:${nextRelease.version} oc_ndjandadenis_projet6_front:latest"
+            --exec.publishCmd "docker tag oc_ndjandadenis_projet6_front:latest oc_ndjandadenis_projet6_front:${nextRelease.version} && docker tag oc_ndjandadenis_projet6_front:${nextRelease.version} oc_ndjandadenis_projet6_front:latest"
