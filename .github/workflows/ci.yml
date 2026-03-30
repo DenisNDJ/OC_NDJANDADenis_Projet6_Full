@@ -86,7 +86,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set image metadata
+      - name: Set  image metadata
         run: |
           echo "REPO=${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV
 
