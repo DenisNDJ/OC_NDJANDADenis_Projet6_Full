@@ -89,7 +89,6 @@ jobs:
           echo "REPO=${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV
 
       - name: Set up Node
-        if: ${{ steps.changes.outputs.any_changed == 'true' }}
         uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -106,8 +105,8 @@ jobs:
 
       - name: Release frontend
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         run: |
           cd front
           npm install semantic-release \
@@ -118,6 +117,5 @@ jobs:
 
       - name: Build and push frontend release image
         run: |
-          VERSION=$(cat front/.semantic-release-version)
           docker build -f front/Dockerfile -t ghcr.io/${REPO}/front front
           docker push ghcr.io/${REPO}/front
