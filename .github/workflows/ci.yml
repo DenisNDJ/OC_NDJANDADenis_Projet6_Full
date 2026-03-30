@@ -120,6 +120,5 @@ jobs:
 
       - name: Build and push frontend release image
         run: |
-          VERSION=$(cat front/.semantic-release-version)
-          docker build -f front/Dockerfile -t ghcr.io/${REPO}/front:${VERSION} front
-          docker push ghcr.io/${REPO}/front:${VERSION}
+          docker build -f front/Dockerfile -t ghcr.io/${REPO}/front front
+          docker push ghcr.io/${REPO}/front
