@@ -1,7 +1,6 @@
 {
   "branches": ["main"],
-  "name": "oc_ndjandadenis_projet6_front_v${version}",
-  "tagFormat": "v${version}",
+  "tagFormat": "oc-ndjandadenis-projet6-front-v${version}",
   "plugins": [
     "@semantic-release/github"
   ]
