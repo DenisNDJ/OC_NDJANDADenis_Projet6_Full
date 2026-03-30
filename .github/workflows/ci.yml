@@ -99,6 +99,7 @@ jobs:
         id: semantic
         uses: cycjimmy/semantic-release-action@v4
         env:
+          GH_TOKEN: ${{ secrets.TOKEN_GITHUB }}
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
 
   docker:
