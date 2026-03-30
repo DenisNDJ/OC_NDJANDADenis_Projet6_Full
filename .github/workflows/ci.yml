@@ -96,6 +96,9 @@ jobs:
           npm ci
 
       - name: Semantic Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         id: semantic
         uses: cycjimmy/semantic-release-action@v4
         env:
