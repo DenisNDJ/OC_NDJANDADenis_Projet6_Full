@@ -92,16 +92,16 @@ jobs:
       - name: Release frontend
         run: |
           cd front
-          npm install --no-save semantic-release @semantic-release/github 
-          npx -p semantic-release -p @semantic-release/github
+          npm install --no-save semantic-release @semantic-release/github
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
 
-      - name: Release backend
-        run: |
-          cd back
-          npm init
-          npm install --no-save semantic-release @semantic-release/github 
-          npx -p semantic-release -p @semantic-release/github
+      - name: Semantic Release Front
+        id: front_release
+        uses: cycjimmy/semantic-release-action@v4
+        with:
+          semantic_version: 24
+          working_directory: front
+          extends: front/.releaserc.json
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
