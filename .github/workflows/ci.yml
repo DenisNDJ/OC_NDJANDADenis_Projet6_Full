@@ -103,26 +103,19 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.TOKEN_GITHUB }}
 
       - name: Release frontend
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         run: |
           cd front
           npm install --no-save \
             semantic-release \
-            @semantic-release/commit-analyzer \
-            @semantic-release/release-notes-generator \
-            @semantic-release/github \
-            @semantic-release/exec \
-            conventional-changelog-conventionalcommits
+            @semantic-release/github 
           npx -p semantic-release \
-            -p @semantic-release/commit-analyzer \
-            -p @semantic-release/release-notes-generator \
             -p @semantic-release/github \
-            -p @semantic-release/exec \
             semantic-release --extends ./.releaserc.json
 
       - name: Build and push frontend release image
