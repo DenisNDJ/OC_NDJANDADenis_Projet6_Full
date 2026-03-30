@@ -118,6 +118,20 @@ jobs:
             -p @semantic-release/github \
             semantic-release --extends ./.releaserc.json
 
+      - name: Release backend
+        env:
+          GH_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+        run: |
+          cd back
+          npm init
+          npm install --no-save \
+            semantic-release \
+            @semantic-release/github 
+          npx -p semantic-release \
+            -p @semantic-release/github \
+            semantic-release --extends ./.releaserc.json
+
       - name: Build and push frontend release image
         run: |
           docker build -f front/Dockerfile -t ghcr.io/${REPO}/front front
