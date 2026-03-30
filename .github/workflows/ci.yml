@@ -110,7 +110,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         run: |
           cd front
-          npm install semantic-release \
+          npm install --no-save \
+            semantic-release \
             @semantic-release/github \
             @semantic-release/git
 
