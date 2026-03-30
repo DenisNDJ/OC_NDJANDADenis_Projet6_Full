@@ -92,7 +92,7 @@ jobs:
       - name: Release frontend
         run: |
           cd front
-          npm install semantic-release @semantic-release/github 
+          npm install --no-save semantic-release @semantic-release/github 
           npx -p semantic-release -p @semantic-release/github
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
@@ -101,7 +101,7 @@ jobs:
         run: |
           cd back
           npm init
-          npm install semantic-release @semantic-release/github 
+          npm install --no-save semantic-release @semantic-release/github 
           npx -p semantic-release -p @semantic-release/github
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
