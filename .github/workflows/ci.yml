@@ -86,8 +86,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -95,10 +93,7 @@ jobs:
           node-version: 20
 
       - name: Install deps
-        run: |
-        cd front
-        npm ci
-        
+        run: npm ci || npm install
 
       - name: Semantic Release
         id: semantic
