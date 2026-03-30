@@ -77,28 +77,56 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    outputs:
-      new_release_published: ${{ steps.semantic.outputs.new_release_published }}
-      new_release_version: ${{ steps.semantic.outputs.new_release_version }}
-      new_release_major_version: ${{ steps.semantic.outputs.new_release_major_version }}
-      new_release_minor_version: ${{ steps.semantic.outputs.new_release_minor_version }}
-
+    permissions:
+      contents: write
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Setup Node
+      - name: Set image metadata
+        run: |
+          echo "REPO=${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV
+
+      - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: "20"
 
-      - name: Install deps
-        run: npm ci || npm install
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-      - name: Semantic Release
-        id: semantic
-        uses: cycjimmy/semantic-release-action@v4
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
         with:
-          semantic_version: 24
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release frontend
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd front
+          npm install --no-save \
+            semantic-release \
+            @semantic-release/commit-analyzer \
+            @semantic-release/release-notes-generator \
+            @semantic-release/github \
+            @semantic-release/exec \
+            conventional-changelog-conventionalcommits
+          npx -p semantic-release \
+            -p @semantic-release/commit-analyzer \
+            -p @semantic-release/release-notes-generator \
+            -p @semantic-release/github \
+            -p @semantic-release/exec \
+            semantic-release --extends ./.releaserc.json
+
+      - name: Build and push frontend release image
+        run: |
+          VERSION=$(cat front/.semantic-release-version)
+          docker build -f front/Dockerfile -t ghcr.io/${REPO}/front:${VERSION} front
+          docker push ghcr.io/${REPO}/front:${VERSION}
