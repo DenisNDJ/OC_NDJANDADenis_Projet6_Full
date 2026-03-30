@@ -77,7 +77,7 @@ jobs:
 
   release:
     permissions:
-      contents: read
+      contents: write
       packages: write
       attestations: write
       id-token: write
@@ -103,14 +103,13 @@ jobs:
           cache-dependency-path: front/package-lock.json
 
       - name: install sr
-        run: |
-          npm install -g semantic-release
-
-      - name: Run semantic-release
-        id: semantic
-        run: npx semantic-release --repository-url ghcr.io/denisndj
         env:
+          GH_TOKEN: ${{ secrets.TOKEN_GITHUB }}
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+        run: |
+          cd front
+          npm install semantic-release 
+          npx -p semantic-release
 
 
       
