@@ -103,8 +103,6 @@ jobs:
           cd front
           npm install semantic-release 
           npx -p semantic-release
-          docker build -f front/Dockerfile -t ghcr.io/${{ github.repository }}/oc_ndjandadenis_projet6_front front
-          docker push ghcr.io/${REPO}/front:${VERSION}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v7
