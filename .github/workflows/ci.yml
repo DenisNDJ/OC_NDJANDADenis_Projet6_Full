@@ -82,57 +82,26 @@ jobs:
       packages: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set  image metadata
-        run: |
-          echo "REPO=${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV
+        uses: actions/checkout@v6
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: "20"
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log in to GHCR
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.TOKEN_GITHUB }}
-
       - name: Release frontend
-        env:
-          GH_TOKEN: ${{ secrets.TOKEN_GITHUB }}
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         run: |
           cd front
-          npm install --no-save \
-            semantic-release \
-            @semantic-release/github 
-          npx -p semantic-release \
-            -p @semantic-release/github \
-            semantic-release --extends ./.releaserc.json
+          npm install semantic-release @semantic-release/github 
+          npx -p semantic-release -p @semantic-release/github
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
 
       - name: Release backend
-        env:
-          GH_TOKEN: ${{ secrets.TOKEN_GITHUB }}
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         run: |
           cd back
           npm init
-          npm install --no-save \
-            semantic-release \
-            @semantic-release/github 
-          npx -p semantic-release \
-            -p @semantic-release/github \
-            semantic-release --extends ./.releaserc.json
-
-      - name: Build and push frontend release image
-        run: |
-          docker build -f front/Dockerfile -t ghcr.io/${REPO}/front front
-          docker push ghcr.io/${REPO}/front
+          npm install semantic-release @semantic-release/github 
+          npx -p semantic-release -p @semantic-release/github
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
