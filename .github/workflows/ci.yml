@@ -110,14 +110,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         run: |
           cd front
-          npm install --no-save \
-            semantic-release \
-            @semantic-release/github \
-            @semantic-release/git
-
-          npx -p semantic-release \
-            -p @semantic-release/github \
-            -p @semantic-release/git
+          npm ci
+          npm install semantic-release 
+          npx -p semantic-release
 
       - name: Build and push frontend release image
         run: |
