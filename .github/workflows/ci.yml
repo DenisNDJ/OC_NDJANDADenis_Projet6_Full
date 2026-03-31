@@ -97,6 +97,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
 
       - name: Semantic Release Front
+        id: semantic
         uses: cycjimmy/semantic-release-action@v4
         with:
           semantic_version: 24
