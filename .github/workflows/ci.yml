@@ -107,10 +107,12 @@ jobs:
 
   docker-retag-image:
     needs: release
+    if: needs.release.outputs.new_release_published == 'true'
     runs-on: ubuntu-latest
 
     env:
-      IMAGE_NAME: ghcr.io/denisndj/oc_ndjandadenis_projet6_front
+      FRONT_IMAGE_NAME: ghcr.io/denisndj/oc_ndjandadenis_projet6_front
+      BACK_IMAGE_NAME: ghcr.io/denisndj/oc_ndjandadenis_projet6_back
       SOURCE_TAG: latest
       VERSION: ${{ needs.release.outputs.new_release_version }}
 
@@ -124,6 +126,12 @@ jobs:
 
       - name: Nouveau tag front
         run: |
-          docker pull $IMAGE_NAME:$SOURCE_TAG
-          docker tag $IMAGE_NAME:$SOURCE_TAG $IMAGE_NAME:v$VERSION
-          docker push $IMAGE_NAME:v$VERSION
+          docker pull $FRONT_IMAGE_NAME:$SOURCE_TAG
+          docker tag $FRONT_IMAGE_NAME:$SOURCE_TAG $FRONT_IMAGE_NAME:v$VERSION
+          docker push $FRONT_IMAGE_NAME:v$VERSION
+
+      - name: Nouveau tag back
+        run: |
+          docker pull $BACK_IMAGE_NAME:$SOURCE_TAG
+          docker tag $BACK_IMAGE_NAME:$SOURCE_TAG $BACK_IMAGE_NAME:v$VERSION
+          docker push $BACK_IMAGE_NAME:v$VERSION
