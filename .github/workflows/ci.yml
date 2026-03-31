@@ -105,7 +105,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
 
       - name: Semantic Release Front
-        id: front_release
         uses: cycjimmy/semantic-release-action@v4
         with:
           semantic_version: 24
@@ -114,7 +113,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
 
       - name: Semantic Release Front
-        id: front_release
         uses: cycjimmy/semantic-release-action@v4
         with:
           semantic_version: 24
