@@ -102,6 +102,5 @@ jobs:
         with:
           semantic_version: 24
           working_directory: front
-          extends: front/.releaserc.json
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
