@@ -77,7 +77,9 @@ jobs:
           tags: ghcr.io/denisndj/oc_ndjandadenis_projet6_front:latest
 
   release:
-    needs: build-and-push-image
+    outputs:
+      new_release_published: ${{ steps.semantic.outputs.new_release_published }}
+      new_release_version: ${{ steps.semantic.outputs.new_release_version }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -101,3 +103,27 @@ jobs:
           working_directory: back
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+
+  docker-retag-image:
+    needs: release
+    if: needs.release.outputs.new_release_published == 'true'
+    runs-on: ubuntu-latest
+
+    env:
+      IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/oc_ndjandadenis_projet6_front
+      SOURCE_TAG: latest
+      VERSION: ${{ needs.release.outputs.new_release_version }}
+
+    steps:
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.TOKEN_GITHUB }}
+
+      - name: Pull existing image
+        run: |
+          docker pull $IMAGE_NAME:$SOURCE_TAG
+          docker tag $IMAGE_NAME:$SOURCE_TAG $IMAGE_NAME:v$VERSION
+          docker push $IMAGE_NAME:v$VERSION
