@@ -89,9 +89,17 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Release frontend
+      - name: Prep frontend
         run: |
           cd front
+          npm install --no-save semantic-release @semantic-release/github
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+
+      - name: Prep backend
+        run: |
+          cd back
+          npm init
           npm install --no-save semantic-release @semantic-release/github
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
@@ -102,5 +110,14 @@ jobs:
         with:
           semantic_version: 24
           working_directory: front
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+
+      - name: Semantic Release Front
+        id: front_release
+        uses: cycjimmy/semantic-release-action@v4
+        with:
+          semantic_version: 24
+          working_directory: back
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
