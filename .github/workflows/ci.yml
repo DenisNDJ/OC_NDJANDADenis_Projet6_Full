@@ -84,26 +84,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Set up Node
-        uses: actions/setup-node@v6
-        with:
-          node-version: "20"
-
-      - name: Prep frontend
-        run: |
-          cd front
-          npm install --no-save semantic-release @semantic-release/github
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
-
-      - name: Prep backend
-        run: |
-          cd back
-          npm init
-          npm install --no-save semantic-release @semantic-release/github
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
-
       - name: Semantic Release Front
         uses: cycjimmy/semantic-release-action@v4
         with:
