@@ -109,7 +109,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/oc_ndjandadenis_projet6_front
+      IMAGE_NAME: ghcr.io/denisndj/oc_ndjandadenis_projet6_front
       SOURCE_TAG: latest
       VERSION: ${{ needs.release.outputs.new_release_version }}
 
